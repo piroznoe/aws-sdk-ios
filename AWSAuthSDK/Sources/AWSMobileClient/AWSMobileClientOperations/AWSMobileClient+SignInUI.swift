@@ -280,7 +280,8 @@ extension AWSMobileClient: AWSCognitoAuthDelegate {
         if (developerNavigationController?.visibleViewController != nil) {
             return developerNavigationController!.visibleViewController!
         }
-        return UIApplication.shared.keyWindow!.rootViewController!
+        let application = UIApplication.value(forKey: "shared") as? UIApplication
+        return application?.keyWindow?.rootViewController ?? UIViewController()
     }
 
     public func shouldLaunchSignInVCIfRefreshTokenIsExpired() -> Bool {
