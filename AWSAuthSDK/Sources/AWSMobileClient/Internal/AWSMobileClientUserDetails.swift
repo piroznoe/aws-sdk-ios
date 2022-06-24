@@ -117,5 +117,16 @@ internal class AWSMobileClientUserDetails {
             return nil
         }
     }
+  
+  public func deleteUserAttribute(attributeNames: [String], completionHandler: @escaping ((Error?) -> Void)) {
+    self.cognitoIdentityUser.deleteAttributes(attributeNames).continueWith { (task) -> Any? in
+      if let error = task.error {
+        completionHandler(AWSMobileClientError.makeMobileClientError(from: error))
+      } else if let _ = task.result {
+        completionHandler(nil)
+      }
+      return nil
+    }
+  }
     
 }

@@ -77,3 +77,11 @@ extension AWSMobileClient {
     }
 
 }
+
+extension AWSMobileClient {
+  public func deleteUserAttribute(attributeName: [String],
+                                  completionHandler: @escaping (Error?) -> Void) {
+    let userDetails = AWSMobileClientUserDetails(with: self.userpoolOpsHelper.currentActiveUser!)
+    userDetails.deleteUserAttribute(attributeNames: attributeName, completionHandler: completionHandler)
+  }
+}
